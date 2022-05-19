@@ -9,6 +9,7 @@ import { AquaticFoodDetailComponent } from './aquatic-food/aquatic-food-detail/a
 import { AquaticFoodItemComponent } from './aquatic-food/aquatic-food-list/aquatic-food-item/aquatic-food-item.component';
 import { DistributionListComponent } from './distribution-list/distribution-list.component';
 import { DistributionEditComponent } from './distribution-list/distribution-edit/distribution-edit.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DistributionEditComponent } from './distribution-list/distribution-edit
     AquaticFoodDetailComponent,
     AquaticFoodItemComponent,
     DistributionListComponent,
-    DistributionEditComponent
+    DistributionEditComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

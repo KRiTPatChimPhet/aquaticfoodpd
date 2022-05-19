@@ -1,13 +1,15 @@
-<header></header>
+<app-header
+  (aquaticFood)="onAquaticFood($event)"
+  (distribution)="onDritisbution($event)"
+  ></app-header>
 <br>
 <div class="container">
-  <div class="row">
+  <div class="row" *ngIf="openAqutic === 'on'">
     <div class="col-md-12">
       <app-aquatic-food></app-aquatic-food>
     </div>
   </div>
-  <hr>
-  <div class="row">
+  <div class="row" *ngIf="openDritisbution === 'on'">
     <div class="col-md-12">
       <app-distribution-list></app-distribution-list>
     </div>
