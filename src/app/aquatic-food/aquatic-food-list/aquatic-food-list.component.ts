@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AquaticFood } from '../aquaticFood.model';
+
 
 @Component({
   selector: 'app-aquatic-food-list',
@@ -19,6 +20,19 @@ export class AquaticFoodListComponent implements OnInit {
       'https://www.simummuangmarket.com/uploads/image-1578629204032.png'
     )
   ];
+
+  @Output() details = new EventEmitter<string>();
+
+  datas: string = "";
+
+  openDetails(data:any){
+    this.datas=data
+    this.details.emit(this.datas)
+    console.log(this.details)
+  };
+
+
+
 
   constructor() { }
 

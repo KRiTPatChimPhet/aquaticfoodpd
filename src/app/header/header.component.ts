@@ -7,6 +7,20 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+<<<<<<< HEAD
+=======
+  @Output() open = new EventEmitter<string>();
+
+  onAquaticFood(){
+    this.open.emit("aquatic");
+  }
+
+  onDritisbution(){
+    this.open.emit("dritisbution");
+  }
+
+
+>>>>>>> section2
   constructor() { }
 
   ngOnInit(): void {

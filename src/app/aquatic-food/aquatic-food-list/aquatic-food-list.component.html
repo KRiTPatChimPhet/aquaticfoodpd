@@ -5,19 +5,10 @@
 </div><br>
 <div class="row">
   <div class="col-12" >
-    <a href="" class="list-group-item clearfix" *ngFor="let aquaticItem of aquaticFoods" >
-      <div class="float-start">
-        <h4 class="list-group-item-heading">{{aquaticItem.name}}</h4>
-        <p class="list-group-item-text">{{aquaticItem.description}}</p>
-      </div>
-      <span class="float-end">
-        <img
-        src={{aquaticItem.imagePath}}
-        alt={{aquaticItem.name}}
-        class="img-responsive"
-        style="max-width: 50px;">
-      </span>
-    </a>
+    <app-aquatic-food-item
+      *ngFor="let aquaticFood of aquaticFoods"
+      [items] ="aquaticFood" (detail)="openDetails($event)">
+    </app-aquatic-food-item>
   </div>
 </div>
-<app-aquatic-food-item></app-aquatic-food-item>
+
