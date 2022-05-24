@@ -23,13 +23,13 @@ export class AquaticFoodListComponent implements OnInit {
 
   @Output() details = new EventEmitter<string>();
 
-  datas = ""
+  datas: string = "";
 
   openDetails(data:any){
     this.datas=data
     this.details.emit(this.datas)
     console.log(this.details)
-  }
+  };
 
 
 

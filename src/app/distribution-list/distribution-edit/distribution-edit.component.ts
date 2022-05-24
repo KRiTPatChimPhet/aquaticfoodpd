@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-distribution-edit',
@@ -12,10 +12,14 @@ export class DistributionEditComponent implements OnInit {
     quantity: string;
   }>();
 
-  onAddFish(aquticName:HTMLInputElement, qty: HTMLInputElement) {
+  @ViewChild('aquticName') aquticName!: ElementRef;
+
+  @ViewChild('qty') qty!: ElementRef;
+
+  onAddFish() {
     this.menuCreated.emit({
-      name: aquticName.value,
-      quantity: qty.value,
+      name: this.aquticName.nativeElement.value,
+      quantity: this.qty.nativeElement.value
     });
   }
 
