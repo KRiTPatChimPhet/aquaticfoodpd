@@ -7,6 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AquaticFoodComponent implements OnInit {
 
+  check=false
+
+  dataDetail! :{
+    name: string,
+    description: string,
+    imagePath: string
+  }
+
+  openDetail(details: any){
+    this.dataDetail = details
+    this.check = true
+    console.log(this.dataDetail)
+  }
+
   constructor() { }
 
   ngOnInit(): void {

@@ -11,6 +11,11 @@ export class DistributionListComponent implements OnInit {
     new Distribution("ปลาอินทรี",10),
     new Distribution("ปลาหมึก",12)
   ];
+  onAdded(data: any) {
+    this.distributions.push(data);
+    console.log(data)
+  }
+
 
   constructor() { }
 

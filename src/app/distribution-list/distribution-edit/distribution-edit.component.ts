@@ -1,16 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-distribution-edit',
   templateUrl: './distribution-edit.component.html',
-  styleUrls: ['./distribution-edit.component.css']
+  styleUrls: ['./distribution-edit.component.css'],
 })
 export class DistributionEditComponent implements OnInit {
 
-  constructor() { }
+  @Output() menuCreated = new EventEmitter<{
+    name: string;
+    quantity: string;
+  }>();
 
-  ngOnInit(): void {
+  onAddFish(aquticName:HTMLInputElement, qty: HTMLInputElement) {
+    this.menuCreated.emit({
+      name: aquticName.value,
+      quantity: qty.value,
+    });
   }
 
-}
+  constructor() {}
 
+  ngOnInit(): void {}
+}
