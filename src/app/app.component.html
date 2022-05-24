@@ -1,23 +1,10 @@
-<<<<<<< HEAD
-<app-header></app-header>
-=======
 <app-header (open)="onFeatureLoad($event)"></app-header>
->>>>>>> section2
 <br>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-<<<<<<< HEAD
-      <app-aquatic-food></app-aquatic-food>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <app-distribution-list></app-distribution-list>
-=======
       <app-aquatic-food *ngIf="openApp === 'aquatic'"></app-aquatic-food>
       <app-distribution-list *ngIf="openApp === 'dritisbution'"></app-distribution-list>
->>>>>>> section2
     </div>
   </div>
 </div>
