@@ -7,18 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'aquaticfoodpdtest';
-<<<<<<< HEAD
-=======
   openApp = ''
 
   onFeatureLoad(data: string) {
     this.openApp = data
   }
-
-  // onDritisbution(dritibutionData: string) {
-  //   this.openApp = dritibutionData
-  // }
->>>>>>> section2
 
   constructor() {
 
