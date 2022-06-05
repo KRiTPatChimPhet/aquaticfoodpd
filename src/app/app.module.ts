@@ -10,6 +10,8 @@ import { AquaticFoodItemComponent } from './aquatic-food/aquatic-food-list/aquat
 import { DistributionListComponent } from './distribution-list/distribution-list.component';
 import { DistributionEditComponent } from './distribution-list/distribution-edit/distribution-edit.component';
 import { HeaderComponent } from './header/header.component';
+import { DropdownDirective } from './aquatic-food/aquatic-food-detail/dropdown/dropdown.directive';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { HeaderComponent } from './header/header.component';
     AquaticFoodItemComponent,
     DistributionListComponent,
     DistributionEditComponent,
-    HeaderComponent
+    HeaderComponent,
+    DropdownDirective,
   ],
   imports: [
     BrowserModule,
