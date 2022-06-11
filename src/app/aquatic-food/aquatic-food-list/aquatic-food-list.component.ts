@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AquaticFoodService } from 'src/app/service/aquaticfood.service';
 import { AquaticFood } from '../aquaticFood.model';
 
 
@@ -8,18 +9,7 @@ import { AquaticFood } from '../aquaticFood.model';
   styleUrls: ['./aquatic-food-list.component.css']
 })
 export class AquaticFoodListComponent implements OnInit {
-  aquaticFoods: AquaticFood[] = [
-    new AquaticFood(
-      'ปลาอินทรี',
-      'This is a test',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Cybium_interruptum_Ford_56.jpg/480px-Cybium_interruptum_Ford_56.jpg'
-    ),
-    new AquaticFood(
-      'ปลาหมึก',
-      'This is a test',
-      'https://www.simummuangmarket.com/uploads/image-1578629204032.png'
-    )
-  ];
+
 
   @Output() details = new EventEmitter<string>();
 
@@ -34,7 +24,8 @@ export class AquaticFoodListComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(private aquaticFoodServices:AquaticFoodService) { }
+  aquaticFoods = this.aquaticFoodServices.getAquaticFood();
 
   ngOnInit(): void {
   }
