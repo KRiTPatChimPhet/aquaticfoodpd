@@ -1,4 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
+import { AquaticFoodService } from 'src/app/service/aquatic-food.service';
+import { AquaticFood } from '../../aquaticFood.model';
 
 @Component({
   selector: 'app-aquatic-food-item',
@@ -6,23 +8,18 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./aquatic-food-item.component.css'],
 })
 export class AquaticFoodItemComponent implements OnInit {
-  @Input() items!: {
-    name: string,
-    description: string,
-    imagePath: string
-  };
 
-  @Output() detail = new EventEmitter<{
-    name: string,
-    description: string,
-    imagePath: string
-  }>();
-
-  onDetail() {
-    this.detail.emit(this.items);
-  }
-
-  constructor() {}
+  constructor(private aquaticFoodService:AquaticFoodService ) {}
 
   ngOnInit(): void {}
+
+  @Input() item!: AquaticFood;
+
+  onDetail() {
+    this.aquaticFoodService.aquaticSelected.emit(this.item);
+  }
+
+
+
+
 }

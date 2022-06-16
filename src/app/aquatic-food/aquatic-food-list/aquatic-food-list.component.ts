@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { AquaticFoodService } from 'src/app/service/aquatic-food.service';
 import { AquaticFood } from '../aquaticFood.model';
-
 
 @Component({
   selector: 'app-aquatic-food-list',
@@ -9,22 +9,12 @@ import { AquaticFood } from '../aquaticFood.model';
 })
 export class AquaticFoodListComponent implements OnInit {
 
-  @Output() details = new EventEmitter<string>();
+  aquaticFoods! : AquaticFood[];
 
-  datas: string = "";
-
-  openDetails(data:any){
-    this.datas=data
-    this.details.emit(this.datas)
-    console.log(this.details)
-  };
-
-
-
-
-  constructor() { }
+  constructor(private aquanticFoodService: AquaticFoodService) {}
 
   ngOnInit(): void {
+    this.aquaticFoods = this.aquanticFoodService.getAquaticFoods();
   }
 
 }

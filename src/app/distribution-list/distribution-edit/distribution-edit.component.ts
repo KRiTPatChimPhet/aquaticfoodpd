@@ -1,4 +1,12 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Input,
+} from '@angular/core';
+import { DistributionService } from 'src/app/service/distribution.service';
+import { Distribution } from 'src/app/shared/distribution.model';
 
 @Component({
   selector: 'app-distribution-edit',
@@ -7,23 +15,64 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '
 })
 export class DistributionEditComponent implements OnInit {
 
-  @Output() menuCreated = new EventEmitter<{
-    name: string;
-    quantity: string;
-  }>();
+  @Input() data!: Distribution;
+
+  D!: Distribution;
+
+  placeholderDritibution!: { name: string; quantity: string };
+
+  constructor(private distibutionService: DistributionService) {}
+
+  ngOnInit(): void {
+    this.D = { name: '', quantity: NaN };
+    this.distibutionService.DriSelected.subscribe((data) => {
+      this.D = data;
+    });
+    this.placeholderDritibution = {
+      name: 'Aquatic Name',
+      quantity: 'Aquatic Qty'
+    }
+  }
 
   @ViewChild('aquticName') aquticName!: ElementRef;
 
   @ViewChild('qty') qty!: ElementRef;
 
   onAddFish() {
-    this.menuCreated.emit({
-      name: this.aquticName.nativeElement.value,
-      quantity: this.qty.nativeElement.value
-    });
+    if (
+      this.aquticName.nativeElement.value === '' ||
+      this.qty.nativeElement.value === ''
+    ) {
+      this.placeholderDritibution = {
+        name: 'กรุณากรอกข้อมูล',
+        quantity: 'กรุณากรอกข้อมูล',
+      };
+    } else {
+      this.distibutionService.addNewOrder(
+        (this.D = {
+          name: this.aquticName.nativeElement.value,
+          quantity: parseInt(this.qty.nativeElement.value)
+        })
+      );
+    }
   }
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  updateData(){
+    if (
+      this.aquticName.nativeElement.value === '' ||
+      this.qty.nativeElement.value === ''
+    ) {
+      this.placeholderDritibution = {
+        name: 'กรุณากรอกข้อมูล',
+        quantity: 'กรุณากรอกข้อมูล',
+      };
+    } else {
+    this.distibutionService.updateQty(
+      (this.D = {
+        name: this.aquticName.nativeElement.value,
+        quantity: parseInt(this.qty.nativeElement.value)
+      })
+    )
+    }
+  }
 }

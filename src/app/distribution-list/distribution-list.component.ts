@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DistributionService } from '../service/distribution.service';
 import { Distribution } from '../shared/distribution.model';
 
 @Component({
@@ -7,31 +8,26 @@ import { Distribution } from '../shared/distribution.model';
   styleUrls: ['./distribution-list.component.css'],
 })
 export class DistributionListComponent implements OnInit {
-  distributions: Distribution[] = [
-    new Distribution('ปลาอินทรี', 10),
-    new Distribution('ปลาหมึก', 12),
-  ];
 
-  check: boolean = false;
+  distributions! : Distribution[];
 
-  onAdded(data: any) {
-    this.check = false;
-    for (let i = 0; i < this.distributions.length; i++) {
-      if (this.distributions[i].name === data.name.trim()) {
-        this.distributions[i].quantity += parseInt(data.quantity);
-        this.check = true;
-        }
-      }
-    if (this.check === false) {
-      this.distributions.push({
-        name: data.name.trim(),
-        quantity: parseInt(data.quantity),
-      });
-    }
+  @Input() item!: Distribution;
+
+  constructor(private distibutionService: DistributionService) {}
+
+  ngOnInit(): void {
+    this.distributions = this.distibutionService.getDistridutions();
+
   }
 
+  // addNewOrder(data: Distribution) {
+  //   console.log(data);
+  //   let dataAdd = {name: data.name, quantity: data.quantity};
+  //   this.distibutionService.addNewOrder(dataAdd);
+  // }
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  putToInput(item : Distribution){
+    this.distibutionService.DriSelected.emit(item);
+  }
 }
+

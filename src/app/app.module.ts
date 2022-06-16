@@ -10,7 +10,7 @@ import { AquaticFoodItemComponent } from './aquatic-food/aquatic-food-list/aquat
 import { DistributionListComponent } from './distribution-list/distribution-list.component';
 import { DistributionEditComponent } from './distribution-list/distribution-edit/distribution-edit.component';
 import { HeaderComponent } from './header/header.component';
-import { DropdownDirective } from './aquatic-food/aquatic-food-detail/dropdown/dropdown.directive';
+import { DropdownDirective } from './shared/dropdown/dropdown.directive';
 import { AquaticFoodService } from './service/aquatic-food.service';
 
 
