@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-md-5">
-    <app-aquatic-food-list (details)="openDetail($event)"></app-aquatic-food-list>
+    <app-aquatic-food-list></app-aquatic-food-list>
   </div>
   <div class="col-md-7">
-    <app-aquatic-food-detail [data]="dataDetail" *ngIf="check===true"></app-aquatic-food-detail>
+    <app-aquatic-food-detail [data]="dataDetail"  *ngIf="dataDetail" ></app-aquatic-food-detail>
   </div>
 </div>
 

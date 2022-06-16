@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AquaticFoodService } from '../service/aquatic-food.service';
+import { AquaticFood } from './aquaticFood.model';
 
 @Component({
   selector: 'app-aquatic-food',
@@ -7,23 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AquaticFoodComponent implements OnInit {
 
-  check:boolean = false;
+  dataDetail! : AquaticFood;
 
-  dataDetail! :{
-    name: string,
-    description: string,
-    imagePath: string
-  };
-
-  openDetail(details: any){
-    this.dataDetail = details
-    this.check = true
-    console.log(this.dataDetail)
-  };
-
-  constructor() { }
+  constructor(private aquaticFoodsService: AquaticFoodService) {
+  }
 
   ngOnInit(): void {
-  }
+    this.aquaticFoodsService.aquaticSelected.subscribe(
+      (data) => {
+        this.dataDetail = data;
+      }
+    );
+  }//subscribe เป็นตัวรับฟัง event
 
 }

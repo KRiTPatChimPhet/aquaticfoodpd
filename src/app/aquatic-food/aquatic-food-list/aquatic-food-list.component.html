@@ -7,7 +7,7 @@
   <div class="col-12" >
     <app-aquatic-food-item
       *ngFor="let aquaticFood of aquaticFoods"
-      [items] ="aquaticFood" (detail)="openDetails($event)">
+      [item] ="aquaticFood">
     </app-aquatic-food-item>
   </div>
 </div>

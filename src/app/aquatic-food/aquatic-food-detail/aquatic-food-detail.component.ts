@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CalculateQuatityService } from 'src/app/service/calculate-quatity.service';
+import { AquaticFood } from '../aquaticFood.model';
 
 @Component({
   selector: 'app-aquatic-food-detail',
@@ -7,16 +9,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AquaticFoodDetailComponent implements OnInit {
 
-  @Input() data!:{
-  name: string,
-  description: string,
-  imagePath: string
-};
+  @Input() data!: AquaticFood;
 
-
-  constructor() { }
+  constructor(private calculate: CalculateQuatityService) { }
 
   ngOnInit(): void {
+    this.calculate.calculate();
   }
 
 }
