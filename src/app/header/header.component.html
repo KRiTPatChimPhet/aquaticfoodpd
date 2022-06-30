@@ -1,18 +1,26 @@
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #6f42c1;">
   <div class="container-fluid">
-    <a href="#" class="navbar-brand">Aquatic Food PD</a>
+    <a class="navbar-brand"  routerLink="/">Aquatic Food PD</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a href="#" class="nav-link" (click)="onAquaticFood()">Aquatic Food</a>
+          <a class="nav-link" routerLink="/aquatic-food" >Aquatic Food</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link" (click)="onDritisbution()">Distribution</a>
+          <a class="nav-link" routerLink="/distribution-list">Distribution</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-3">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+

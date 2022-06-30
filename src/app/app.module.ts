@@ -12,7 +12,15 @@ import { DistributionEditComponent } from './distribution-list/distribution-edit
 import { HeaderComponent } from './header/header.component';
 import { DropdownDirective } from './shared/dropdown/dropdown.directive';
 import { AquaticFoodService } from './service/aquatic-food.service';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent},
+  { path: 'aquatic-food', component: AquaticFoodComponent},
+  { path: 'aquatic-food/:name/:description/:imagePath', component: AquaticFoodItemComponent},
+  { path: 'distribution-list', component: DistributionListComponent},
+];
 
 @NgModule({
   declarations: [
@@ -25,10 +33,12 @@ import { AquaticFoodService } from './service/aquatic-food.service';
     DistributionEditComponent,
     HeaderComponent,
     DropdownDirective,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [AquaticFoodService],
   bootstrap: [AppComponent]

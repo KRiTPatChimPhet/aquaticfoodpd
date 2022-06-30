@@ -9,13 +9,13 @@ export class HeaderComponent implements OnInit {
 
   @Output() open = new EventEmitter<string>();
 
-  onAquaticFood(){
-    this.open.emit("aquatic");
-  }
+  // onAquaticFood(){
+  //   this.open.emit("aquatic");
+  // }
 
-  onDritisbution(){
-    this.open.emit("dritisbution");
-  }
+  // onDritisbution(){
+  //   this.open.emit("dritisbution");
+  // }
   constructor() { }
 
   ngOnInit(): void {
