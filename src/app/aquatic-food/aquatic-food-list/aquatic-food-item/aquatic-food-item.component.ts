@@ -2,6 +2,7 @@ import { Component, Input, OnInit} from '@angular/core';
 import { AquaticFoodService } from 'src/app/service/aquatic-food.service';
 import { AquaticFood } from '../../aquaticFood.model';
 
+
 @Component({
   selector: 'app-aquatic-food-item',
   templateUrl: './aquatic-food-item.component.html',
@@ -11,15 +12,11 @@ export class AquaticFoodItemComponent implements OnInit {
 
   constructor(private aquaticFoodService:AquaticFoodService ) {}
 
-  ngOnInit(): void {}
+  aquaticFood!:AquaticFood[];
 
-  @Input() item!: AquaticFood;
-
-  onDetail() {
-    this.aquaticFoodService.aquaticSelected.emit(this.item);
+  ngOnInit(): void {
+    this.aquaticFood = this.aquaticFoodService.getAquaticFoods();
   }
-
-
 
 
 }

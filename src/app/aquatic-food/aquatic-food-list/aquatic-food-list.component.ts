@@ -8,14 +8,7 @@ import { AquaticFood } from '../aquaticFood.model';
   styleUrls: ['./aquatic-food-list.component.css']
 })
 export class AquaticFoodListComponent implements OnInit {
-
-  aquaticFoods! : AquaticFood[];
-
-  constructor(private aquanticFoodService: AquaticFoodService) {}
-
-  ngOnInit(): void {
-    this.aquaticFoods = this.aquanticFoodService.getAquaticFoods();
-  }
+  ngOnInit(): void {}
 
 }
 

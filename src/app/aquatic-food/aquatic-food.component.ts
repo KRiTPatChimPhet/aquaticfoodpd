@@ -9,17 +9,7 @@ import { AquaticFood } from './aquaticFood.model';
 })
 export class AquaticFoodComponent implements OnInit {
 
-  dataDetail! : AquaticFood;
-
-  constructor(private aquaticFoodsService: AquaticFoodService) {
-  }
-
   ngOnInit(): void {
-    this.aquaticFoodsService.aquaticSelected.subscribe(
-      (data) => {
-        this.dataDetail = data;
-      }
-    );
-  }//subscribe เป็นตัวรับฟัง event
+  }
 
 }

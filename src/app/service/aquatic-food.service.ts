@@ -3,15 +3,22 @@ import { AquaticFood } from "../aquatic-food/aquaticFood.model"
 @Injectable()
 export class AquaticFoodService{
 
-  aquaticSelected = new EventEmitter<AquaticFood>();
-
   private aquaticFoods: AquaticFood[] = [
     new AquaticFood ("ปลาอินทรี", "กินได้ อร่อยดี", "https://www.bloggang.com/data/f/fasaiwonmai/picture/1452667716.jpg",100,0),
-    new AquaticFood ("หมึก", "กินได้ อร่อยดี", "https://www.foodproject.co.th/images/product/Whole_Squid.jpg",100,0)
+    new AquaticFood ("หมึก", "กินได้ อร่อยดี", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Arrow_squid.jpg/300px-Arrow_squid.jpg",100,0)
   ];
 
   getAquaticFoods(){
-    return this.aquaticFoods.slice();
+    return this.aquaticFoods;
+  }
+
+  openDescription(name:string){
+    const detail = this.aquaticFoods.find(
+      (d)=>{
+        return d.name == name
+      }
+    )
+    return detail
   }
 
 

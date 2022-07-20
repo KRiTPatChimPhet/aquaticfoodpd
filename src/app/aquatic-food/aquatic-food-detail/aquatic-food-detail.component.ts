@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { AquaticFoodService } from 'src/app/service/aquatic-food.service';
 import { CalculateQuatityService } from 'src/app/service/calculate-quatity.service';
 import { AquaticFood } from '../aquaticFood.model';
 
@@ -9,12 +11,17 @@ import { AquaticFood } from '../aquaticFood.model';
 })
 export class AquaticFoodDetailComponent implements OnInit {
 
-  @Input() data!: AquaticFood;
+  data!: AquaticFood;
 
-  constructor(private calculate: CalculateQuatityService) { }
+  constructor(private calculate: CalculateQuatityService,private route: ActivatedRoute,private aquaticFoodService:AquaticFoodService) { }
 
   ngOnInit(): void {
-    this.calculate.calculate();
+    this.calculate.calculate()
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.data = this.aquaticFoodService.openDescription(params['name'])!;
+      }
+    );
   }
 
 }
