@@ -39,40 +39,20 @@ export class DistributionEditComponent implements OnInit {
   @ViewChild('qty') qty!: ElementRef;
 
   onAddFish() {
-    if (
-      this.aquticName.nativeElement.value === '' ||
-      this.qty.nativeElement.value === ''
-    ) {
-      this.placeholderDritibution = {
-        name: 'กรุณากรอกข้อมูล',
-        quantity: 'กรุณากรอกข้อมูล',
-      };
-    } else {
       this.distibutionService.addNewOrder(
         (this.D = {
           name: this.aquticName.nativeElement.value,
           quantity: parseInt(this.qty.nativeElement.value)
         })
       );
-    }
   }
 
   updateData(){
-    if (
-      this.aquticName.nativeElement.value === '' ||
-      this.qty.nativeElement.value === ''
-    ) {
-      this.placeholderDritibution = {
-        name: 'กรุณากรอกข้อมูล',
-        quantity: 'กรุณากรอกข้อมูล',
-      };
-    } else {
     this.distibutionService.updateQty(
       (this.D = {
         name: this.aquticName.nativeElement.value,
         quantity: parseInt(this.qty.nativeElement.value)
       })
     )
-    }
   }
 }

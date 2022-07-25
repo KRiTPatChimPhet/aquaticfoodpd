@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { DropdownDirective } from './shared/dropdown/dropdown.directive';
 import { AquaticFoodService } from './service/aquatic-food.service';
 import { AquaticEditComponent } from './aquatic-edit/aquatic-edit.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -27,7 +28,8 @@ import { AquaticEditComponent } from './aquatic-edit/aquatic-edit.component';
     DistributionEditComponent,
     HeaderComponent,
     DropdownDirective,
-    AquaticEditComponent
+    AquaticEditComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { AquaticFoodDetailComponent } from './aquatic-food/aquatic-food-detail/a
 import { AquaticFoodItemComponent } from './aquatic-food/aquatic-food-list/aquatic-food-item/aquatic-food-item.component';
 import { AquaticFoodComponent } from './aquatic-food/aquatic-food.component';
 import { DistributionListComponent } from './distribution-list/distribution-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   { path: '', component: AquaticFoodComponent},
@@ -13,7 +14,9 @@ const appRoutes: Routes = [
     {path: 'detail/:name',component: AquaticFoodDetailComponent},
     {path: 'detail/:name/:index/:edit',component: AquaticEditComponent}
   ]},
-  { path: 'distribution-list', component: DistributionListComponent}
+  { path: 'distribution-list', component: DistributionListComponent, children:[
+    {path: ':name',component: DistributionListComponent}]},
+  { path: '**', component: PageNotFoundComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
