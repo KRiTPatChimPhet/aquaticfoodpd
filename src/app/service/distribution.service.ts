@@ -38,6 +38,6 @@ export class DistributionService {
   }
 
   getDistridutions() {
-    return this.distributions.slice();
+    return this.distributions;
   }
 }

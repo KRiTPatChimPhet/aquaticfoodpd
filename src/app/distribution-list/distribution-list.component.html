@@ -7,9 +7,11 @@
 <div class="row">
   <div class="col-md-10">
     <ul class="list-group">
-      <a *ngFor="let item of distributions" class="list-group-item" style="cursor: pointer"
-        [routerLink]="['/distribution-list',item.name]">{{item.name}}
-        ({{item.quantity}})
+      <a [routerLink]="['/distribution-list',item.name]"
+          *ngFor="let item of distributions"
+          class="list-group-item"
+          style="cursor: pointer"
+        >{{item.name}} ({{item.quantity}})
       </a>
     </ul>
   </div>

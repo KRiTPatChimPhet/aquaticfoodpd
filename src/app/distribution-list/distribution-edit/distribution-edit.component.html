@@ -1,15 +1,27 @@
-<form>
+<form (ngSubmit)="onSupmit(f)" #f="ngForm">
   <div class="row">
     <div class="col-3">
-      <input type="text" class="form-control" placeholder={{placeholderDritibution.name}} value={{D.name}}  #aquticName>
+      <input type="text"
+             class="form-control"
+             placeholder={{placeholderDritibution.name}}
+             value={{D.name}}
+             ngModel name="aquaticNameInput"
+             required>
     </div>
     <div class="col-3">
-      <input type="number" class="form-control" placeholder={{placeholderDritibution.quantity}} value={{D.quantity}}  #qty>
+      <input type="number"
+             class="form-control"
+             placeholder={{placeholderDritibution.quantity}}
+             value={{D.quantity}}
+             [files]=""
+             ngModel name="qunatityInput"
+             required
+             pattern="[0-9]+">
     </div>
   </div>
   <div class="row">
     <div class="col-12 mt-3">
-      <button type="button" class="btn btn-success" (click)="onAddFish()">Add</button>
+      <button type="submit" class="btn btn-success" (click)="onAddFish()" [disabled]="f.invalid">Add</button>
       <button type="button" class="btn btn-danger ms-2" (click)="updateData()">Update</button>
       <button type="button" class="btn btn-primary ms-2">Clear</button>
     </div>

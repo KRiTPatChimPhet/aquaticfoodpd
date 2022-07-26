@@ -1,1 +1,42 @@
-<p>aquatic-edit works!</p>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <button type="submit" class="btn btn-success">Save</button>
+  <button type="reset" class="btn btn-danger ms-2">Cancel</button>
+  <div class="row">
+    <div class="col-md-12">
+      <label class="form-label">ชื่อสินค้า</label>
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+    <span *ngIf="!signupForm.get('name')?.valid && signupForm.get('name')?.touched"
+          class="help-block mb-3">กรุณาใส่ชื่อสินค้า</span>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label class="form-label">รับจำนวน</label>
+      <input type="number" class="form-control" formControlName="qty">
+    </div>
+    <span *ngIf="!signupForm.get('qty')?.valid && signupForm.get('qty')?.touched"
+          class="help-block mb-3">กรุณากรอกจำนวนสินค้า</span>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label class="form-label">URL ของภาพประกอบ</label>
+      <input type="text" class="form-control" formControlName="url">
+    </div>
+    <span *ngIf="!signupForm.get('url')?.valid && signupForm.get('url')?.touched"
+          class="help-block mb-3">กรุณากรอก Url รูปของสินค้า</span>
+    <div class="row">
+    <div class="text-center">
+    <img src={{signupForm.value.url}} class="rounded" alt="..." style="width: 200px;">
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label class="form-label">รายละเอียดเกี่ยวกับสินค้า</label>
+      <textarea class="form-control" rows="3" formControlName="detail"></textarea>
+    </div>
+    <span *ngIf="!signupForm.get('detail')?.valid && signupForm.get('detail')?.touched"
+          class="help-block mb-3">กรุณากรอกรายละเอียดสินค้า</span>
+  </div>
+
+</form>

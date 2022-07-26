@@ -21,5 +21,8 @@ export class AquaticFoodService{
     return detail
   }
 
+  addAqutic(name: string, desc: string, imagePath: string, qty:number){
+    this.aquaticFoods.push(new AquaticFood(name,desc,imagePath,qty,0))
+  }
 
 }
