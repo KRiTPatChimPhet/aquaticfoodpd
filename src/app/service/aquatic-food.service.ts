@@ -25,17 +25,22 @@ export class AquaticFoodService {
     this.aquaticFoods.push(new AquaticFood(name, desc, imagePath, qty, 0))
   }
 
+  upDateAquatic(name: string, upDate: AquaticFood) {
+    return this.aquaticFoods.map((value: AquaticFood, index: number) => {
+      if (name === value.name) {
+        this.aquaticFoods[index] = upDate;
+        console.log(upDate)
+      }
+    });
+  }
+
   deleteItem(name: string) {
     this.aquaticFoods.map((value: AquaticFood, index: number) => {
       if (name === value.name) {
-        this.aquaticFoods.splice(index,1)
+        this.aquaticFoods.splice(index, 1)
         console.log('ค่า =', value, 'ตำแหน่ง =', index)
       }
     })
-  }
-
-  updateAqutic(name: string, desc: string, imagePath: string, qty: number) {
-    this.aquaticFoods.push()
   }
 
 

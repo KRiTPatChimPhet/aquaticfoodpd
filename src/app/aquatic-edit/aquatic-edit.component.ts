@@ -13,16 +13,19 @@ export class AquaticEditComponent implements OnInit {
 
   signupForm!: FormGroup;
 
-  aquatic!: AquaticFood
+  aquatic!: AquaticFood | undefined
 
-  constructor(private aquaticFoodService: AquaticFoodService,private route: ActivatedRoute) { }
+  checkOrder!: string
+
+  constructor(private aquaticFoodService: AquaticFoodService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
       (params: Params) => {
-        this.aquatic = this.aquaticFoodService.openDescription(params['name'])!;
+        this.checkOrder = params['name']!;
       }
     );
+    this.aquatic = this.aquaticFoodService.openDescription(this.checkOrder);
     if (!this.aquatic) {
       this.signupForm = new FormGroup({
         'name': new FormControl(null, Validators.required),
@@ -43,9 +46,27 @@ export class AquaticEditComponent implements OnInit {
   }
 
   onSubmit() {
-    this.aquaticFoodService.addAqutic(this.signupForm.value.name, this.signupForm.value.detail, this.signupForm.value.url, this.signupForm.value.qty);
-    console.log(this.signupForm);
-    this.signupForm.reset()
+    if (this.aquatic) {
+      const updateAquatic: AquaticFood =
+      {
+        name: this.signupForm.value.name,
+        description: this.signupForm.value.detail,
+        imagePath: this.signupForm.value.url,
+        quantity: this.signupForm.value.qty,
+        onHand: 0
+      };
+      this.aquaticFoodService.upDateAquatic(this.checkOrder, updateAquatic)
+    } else {
+      this.aquaticFoodService.addAqutic(
+        this.signupForm.value.name,
+        this.signupForm.value.quantity,
+        this.signupForm.value.url,
+        this.signupForm.value.detail
+      );
+    }
+    // this.aquaticFoodService.addAqutic(this.signupForm.value.name, this.signupForm.value.detail, this.signupForm.value.url, this.signupForm.value.qty);
+    // console.log(this.signupForm);
+    // this.signupForm.reset()
   }
 
   onAddMenu() {
