@@ -9,6 +9,7 @@
     <ul class="list-group">
       <a [routerLink]="['/distribution-list',item.name]"
           *ngFor="let item of distributions"
+          (click)="addList(item)"
           class="list-group-item"
           style="cursor: pointer"
         >{{item.name}} ({{item.quantity}})

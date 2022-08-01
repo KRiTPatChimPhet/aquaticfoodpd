@@ -17,6 +17,10 @@ export class DistributionListComponent implements OnInit {
     this.distributions = this.distibutionService.getDistridutions()
   }
 
+  addList(item:any) {
+    this.distibutionService.DriSelected.emit(item)
+  }
+
 
 }
 

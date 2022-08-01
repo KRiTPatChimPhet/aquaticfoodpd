@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
+import { AquaticFood } from '../aquatic-food/aquaticFood.model';
 import { AquaticFoodService } from '../service/aquatic-food.service';
 
 @Component({
@@ -11,20 +13,52 @@ export class AquaticEditComponent implements OnInit {
 
   signupForm!: FormGroup;
 
-  constructor(private aquaticFoodService: AquaticFoodService) { }
+  aquatic!: AquaticFood
+
+  constructor(private aquaticFoodService: AquaticFoodService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.signupForm = new FormGroup({
-      'name': new FormControl(null,Validators.required),
-      'qty' : new FormControl(null,Validators.required),
-      'url': new FormControl(null,Validators.required),
-      'detail': new FormControl(null,Validators.required)
-    })
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.aquatic = this.aquaticFoodService.openDescription(params['name'])!;
+      }
+    );
+    if (!this.aquatic) {
+      this.signupForm = new FormGroup({
+        'name': new FormControl(null, Validators.required),
+        'qty': new FormControl(null, Validators.required),
+        'url': new FormControl(null, Validators.required),
+        'detail': new FormControl(null, Validators.required),
+        'menu': new FormArray([])
+      })
+    } else {
+      this.signupForm = new FormGroup({
+        'name': new FormControl(this.aquatic.name, Validators.required),
+        'qty': new FormControl(this.aquatic.quantity, Validators.required),
+        'url': new FormControl(this.aquatic.imagePath, Validators.required),
+        'detail': new FormControl(this.aquatic.description, Validators.required),
+        'menu': new FormArray([])
+      })
+    }
   }
 
   onSubmit() {
-    this.aquaticFoodService.addAqutic(this.signupForm.value.name,this.signupForm.value.detail,this.signupForm.value.url,this.signupForm.value.qty);
+    this.aquaticFoodService.addAqutic(this.signupForm.value.name, this.signupForm.value.detail, this.signupForm.value.url, this.signupForm.value.qty);
     console.log(this.signupForm);
+    this.signupForm.reset()
+  }
+
+  onAddMenu() {
+    const controls = new FormControl(null, Validators.required);
+    (<FormArray>this.signupForm.get('menu')).push(controls);
+  }
+
+  get controls() {
+    return (this.signupForm.get('menu') as FormArray).controls;
+  }
+
+  deleteMenu(i: number) {
+    (<FormArray>this.signupForm.get('menu')).removeAt(i)
   }
 
 }

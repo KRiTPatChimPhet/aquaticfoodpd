@@ -24,4 +24,8 @@ export class AquaticFoodDetailComponent implements OnInit {
     );
   }
 
+  deleteAqutic() {
+    this.aquaticFoodService.deleteItem(this.data.name)
+  }
+
 }

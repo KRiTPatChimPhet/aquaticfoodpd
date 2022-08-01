@@ -1,42 +1,60 @@
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-  <button type="submit" class="btn btn-success">Save</button>
-  <button type="reset" class="btn btn-danger ms-2">Cancel</button>
+  <button type="submit" class="btn btn-success" [disabled]="!signupForm.valid">Save</button>
+  <button routerLink="" type="button" class="btn btn-danger ms-2">Cancel</button>
+  <button type="reset" *ngIf="signupForm.get('name')?.value ||
+             signupForm.get('quantity')?.value ||
+             signupForm.get('url')?.value ||
+             signupForm.get('detail')?.value" class="btn btn-secondary ms-2">clear</button>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 mt-3">
       <label class="form-label">ชื่อสินค้า</label>
       <input type="text" class="form-control" formControlName="name">
     </div>
     <span *ngIf="!signupForm.get('name')?.valid && signupForm.get('name')?.touched"
-          class="help-block mb-3">กรุณาใส่ชื่อสินค้า</span>
+      class="help-block mb-3 mt-3">กรุณาใส่ชื่อสินค้า</span>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 mt-1">
       <label class="form-label">รับจำนวน</label>
       <input type="number" class="form-control" formControlName="qty">
     </div>
     <span *ngIf="!signupForm.get('qty')?.valid && signupForm.get('qty')?.touched"
-          class="help-block mb-3">กรุณากรอกจำนวนสินค้า</span>
+      class="help-block mb-3 mt-2">กรุณากรอกจำนวนสินค้า</span>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 mt-1">
       <label class="form-label">URL ของภาพประกอบ</label>
       <input type="text" class="form-control" formControlName="url">
     </div>
-    <span *ngIf="!signupForm.get('url')?.valid && signupForm.get('url')?.touched"
-          class="help-block mb-3">กรุณากรอก Url รูปของสินค้า</span>
+    <span *ngIf="!signupForm.get('url')?.valid && signupForm.get('url')?.touched" class="help-block mb-3 mt-2">กรุณากรอก
+      Url รูปของสินค้า</span>
     <div class="row">
-    <div class="text-center">
-    <img src={{signupForm.value.url}} class="rounded" alt="..." style="width: 200px;">
+      <div class="text-center">
+        <img src={{signupForm.value.url}} class="rounded mt-3" alt="..." style="width: 200px;">
+      </div>
     </div>
   </div>
-  </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 mt-1">
       <label class="form-label">รายละเอียดเกี่ยวกับสินค้า</label>
       <textarea class="form-control" rows="3" formControlName="detail"></textarea>
     </div>
     <span *ngIf="!signupForm.get('detail')?.valid && signupForm.get('detail')?.touched"
-          class="help-block mb-3">กรุณากรอกรายละเอียดสินค้า</span>
+      class="help-block mb-3 mt-2">กรุณากรอกรายละเอียดสินค้า</span>
   </div>
-
+  <div class="mb-3 mt-2" formArrayName="menu">
+    <label class="form-label">ตัวอย่าง ชื่อเมนูอาหาร จากวัถุดิบนี้</label>
+    <div class="row mt-1" *ngFor="let menuControl of controls ; let i = index;">
+      <div class="btn-group">
+        <div class="col-11">
+          <input type="text" class="form-control" [formControlName]="i">
+        </div>
+        <div class="col-2" *ngIf="signupForm.get('menu')?.value">
+        <button type="button" (click)="deleteMenu(i)" class="btn btn-danger ms-2">X</button>
+      </div>
+      </div>
+    </div>
+    <hr />
+    <button class="btn btn-success" type="button" (click)="onAddMenu()">เพิ่ม ตย.ชื่อเมนูอาหาร</button>
+  </div>
 </form>
