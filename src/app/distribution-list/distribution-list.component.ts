@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { DistributionService } from '../service/distribution.service';
 import { Distribution } from '../shared/distribution.model';

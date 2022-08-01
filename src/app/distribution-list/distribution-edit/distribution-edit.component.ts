@@ -6,6 +6,7 @@ import {
   Input,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
 import { DistributionService } from 'src/app/service/distribution.service';
 import { Distribution } from 'src/app/shared/distribution.model';
 
@@ -25,12 +26,15 @@ export class DistributionEditComponent implements OnInit {
 
   placeholderDritibution!: { name: string; quantity: string };
 
-  constructor(private distibutionService: DistributionService) { }
+  checkUpdate: boolean = false;
+
+  constructor(private distibutionService: DistributionService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.D = { name: '', quantity: NaN };
     this.distibutionService.DriSelected.subscribe((data) => {
-      this.D = data;
+      this.D = data
+      this.checkUpdate = true;
     });
     this.placeholderDritibution = {
       name: 'Aquatic Name',
@@ -38,16 +42,10 @@ export class DistributionEditComponent implements OnInit {
     }
   }
 
+  check: boolean = false;
+
   onAddFish() {
-    this.distibutionService.addNewOrder(
-      (this.D = {
-        name: this.signupForm.value.aquaticNameInput,
-        quantity: parseInt(this.signupForm.value.qunatityInput)
-      })
-    );
-  }
-  updateData() {
-    this.distibutionService.updateQty(
+    this.check = this.distibutionService.addNewOrder(
       (this.D = {
         name: this.signupForm.value.aquaticNameInput,
         quantity: parseInt(this.signupForm.value.qunatityInput)
@@ -55,8 +53,27 @@ export class DistributionEditComponent implements OnInit {
     )
   }
 
+  updateData() {
+    this.distibutionService.updateQty(
+      (this.D = {
+        name: this.signupForm.value.aquaticNameInput,
+        quantity: parseInt(this.signupForm.value.qunatityInput)
+      })
+    );
+  }
+
   onSupmit(f: NgForm) {
-    console.log(this.signupForm);
+    // console.log(this.signupForm);
+  }
+
+  onClear() {
+    this.checkUpdate = false;
+  }
+
+  onDelete() {
+    this.distibutionService.deleteData(this.signupForm.value.aquaticNameInput);
+    this.checkUpdate = false;
+    this.signupForm.reset()
   }
 }
 

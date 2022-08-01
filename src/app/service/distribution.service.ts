@@ -16,7 +16,7 @@ export class DistributionService {
   check: boolean = false;
 
   addNewOrder(newOrder: Distribution) {
-    this.check = false;
+  this.check = false;
     for (let index = 0; index < this.distributions.length; index++) {
       if (newOrder.name === this.distributions[index].name) {
         this.check = true;
@@ -25,7 +25,7 @@ export class DistributionService {
     if (this.check === false) {
       this.distributions.push(new Distribution(newOrder.name,newOrder.quantity));
     }
-    console.log(this.distributions)
+    return this.check
   }
 
   updateQty(qty: Distribution) {
@@ -39,5 +39,13 @@ export class DistributionService {
 
   getDistridutions() {
     return this.distributions;
+  }
+
+  deleteData(name: string) {
+    this.distributions.map((value: Distribution, index: number) => {
+      if (name === value.name) {
+        this.distributions.splice(index, 1);
+      }
+    })
   }
 }
