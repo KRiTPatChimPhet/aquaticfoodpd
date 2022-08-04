@@ -59,9 +59,9 @@ export class AquaticEditComponent implements OnInit {
     } else {
       this.aquaticFoodService.addAqutic(
         this.signupForm.value.name,
-        this.signupForm.value.quantity,
+        this.signupForm.value.detail,
         this.signupForm.value.url,
-        this.signupForm.value.detail
+        this.signupForm.value.quantity
       );
     }
     // this.aquaticFoodService.addAqutic(this.signupForm.value.name, this.signupForm.value.detail, this.signupForm.value.url, this.signupForm.value.qty);
