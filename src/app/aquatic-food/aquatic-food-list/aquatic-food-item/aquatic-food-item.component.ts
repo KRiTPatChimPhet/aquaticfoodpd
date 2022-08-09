@@ -19,5 +19,4 @@ export class AquaticFoodItemComponent implements OnInit {
     this.aquaticFood = this.aquaticFoodService.getAquaticFoods();
   }
 
-
 }
