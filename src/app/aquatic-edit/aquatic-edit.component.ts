@@ -19,8 +19,7 @@ export class AquaticEditComponent implements OnInit {
   checkOrder!: string
 
   constructor(private aquaticFoodService: AquaticFoodService,
-              private route: ActivatedRoute,
-              private calculate: CalculateQuatityService) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -70,7 +69,6 @@ export class AquaticEditComponent implements OnInit {
       );
       console.log(this.aquaticFoodService.getAquaticFoods)
     }
-    this.calculate.calculate()
     this.signupForm.reset()
   }
 

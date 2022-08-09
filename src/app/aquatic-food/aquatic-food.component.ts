@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AquaticFoodService } from '../service/aquatic-food.service';
-import { AquaticFood } from './aquaticFood.model';
+import { CalculateQuatityService } from '../service/calculate-quatity.service';
 
 @Component({
   selector: 'app-aquatic-food',
@@ -9,7 +8,11 @@ import { AquaticFood } from './aquaticFood.model';
 })
 export class AquaticFoodComponent implements OnInit {
 
+
+  constructor(private calculate: CalculateQuatityService) {}
+
   ngOnInit(): void {
+    this.calculate.calculate()
   }
 
 }

@@ -10,11 +10,9 @@ import { AquaticFood } from '../aquaticFood.model';
 })
 export class AquaticFoodListComponent implements OnInit {
 
-  constructor(private calculate: CalculateQuatityService) {}
-
   ngOnInit(): void {
-    this.calculate.calculate()
   }
+
 
 }
 

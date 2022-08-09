@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { AquaticFood } from '../aquatic-food/aquaticFood.model';
 import { AquaticFoodService } from './aquatic-food.service';
 
@@ -16,35 +16,33 @@ export class DataStorageService {
   constructor(private http: HttpClient, private aquaticFoodService: AquaticFoodService) { }
 
   createPost() {
-    this.aquaticFoodService.getAquaticFoods().map((value:AquaticFood,index: number) => {
-      this.http.post(this.url, value)
+    this.http.put(this.url, this.aquaticFoodService.getAquaticFoods())
       .subscribe((responseData) => {
         console.log('responseData :', responseData)
       })
-      this.aquaticFoodService.resetArray()
-    })
   }
 
   fetchPosts() {
+    this.aquaticFoodService.clearArray();
     this.http.get<{ [key: string]: AquaticFood }>(this.url)
-    .pipe(
-      map((responseData) => {
-        const postArray:AquaticFood[] = [];
-        for(let key in responseData) {
-          if (responseData.hasOwnProperty(key)) {
-            postArray.push({ ...responseData[key]});
-            this.aquaticFoodService.addAqutic(
-              responseData[key].name,
-              responseData[key].description,
-              responseData[key].imagePath,
-              responseData[key].quantity,
-              responseData[key].menu
-            )
+      .pipe(
+        map((responseData) => {
+          const postArray: AquaticFood[] = [];
+          for (let key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              postArray.push({ ...responseData[key] });
+              this.aquaticFoodService.addAqutic(
+                responseData[key].name,
+                responseData[key].description,
+                responseData[key].imagePath,
+                responseData[key].quantity,
+                responseData[key].menu
+              )
+            }
           }
-        }
-        return postArray
-      })
-    )
-    .subscribe(() => {})
+          return postArray
+        })
+      )
+      .subscribe(() => { })
   }
 }

@@ -13,10 +13,6 @@ export class AquaticFoodService {
     return this.aquaticFoods;
   }
 
-  resetArray() {
-    this.aquaticFoods = []
-  }
-
   openDescription(name: string) {
     const detail = this.aquaticFoods.find(
       (d) => {
@@ -24,6 +20,10 @@ export class AquaticFoodService {
       }
     )
     return detail
+  }
+
+  clearArray() {
+    this.aquaticFoods = []
   }
 
   addAqutic(name: string, desc: string, imagePath: string, qty: number, menu: Array<string>) {

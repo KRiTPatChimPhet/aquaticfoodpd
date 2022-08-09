@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AquaticFood } from '../aquatic-food/aquaticFood.model';
 import { AquaticFoodService } from '../service/aquatic-food.service';
+import { CalculateQuatityService } from '../service/calculate-quatity.service';
 import { DataStorageService } from '../service/data-storage.service';
 
 @Component({
@@ -13,10 +14,9 @@ export class HeaderComponent implements OnInit {
 
   url = "https://aquatic-food-default-rtdb.asia-southeast1.firebasedatabase.app/post.json";
 
-  constructor(private http: HttpClient, private dataStorageService: DataStorageService, private aquaticFoodService: AquaticFoodService) { }
+  constructor(private http: HttpClient, private dataStorageService: DataStorageService, private calculate: CalculateQuatityService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onCreatePost() {
     this.dataStorageService.createPost()
@@ -24,6 +24,6 @@ export class HeaderComponent implements OnInit {
 
   onFetchPosts() {
     this.dataStorageService.fetchPosts()
-    this.http.delete(this.url).subscribe(() => {})
+    this.calculate.calculate()
   }
 }
