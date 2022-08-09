@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AquaticFood } from '../aquatic-food/aquaticFood.model';
 import { AquaticFoodService } from '../service/aquatic-food.service';
+import { CalculateQuatityService } from '../service/calculate-quatity.service';
 
 @Component({
   selector: 'app-aquatic-edit',
@@ -17,7 +18,9 @@ export class AquaticEditComponent implements OnInit {
 
   checkOrder!: string
 
-  constructor(private aquaticFoodService: AquaticFoodService, private route: ActivatedRoute) { }
+  constructor(private aquaticFoodService: AquaticFoodService,
+              private route: ActivatedRoute,
+              private calculate: CalculateQuatityService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -53,7 +56,8 @@ export class AquaticEditComponent implements OnInit {
         description: this.signupForm.value.detail,
         imagePath: this.signupForm.value.url,
         quantity: this.signupForm.value.qty,
-        onHand: 0
+        onHand: 0,
+        menu : this.signupForm.value.menu
       };
       this.aquaticFoodService.upDateAquatic(this.checkOrder, updateAquatic)
     } else {
@@ -61,12 +65,13 @@ export class AquaticEditComponent implements OnInit {
         this.signupForm.value.name,
         this.signupForm.value.detail,
         this.signupForm.value.url,
-        this.signupForm.value.quantity
+        this.signupForm.value.qty,
+        this.signupForm.value.menu
       );
+      console.log(this.aquaticFoodService.getAquaticFoods)
     }
-    // this.aquaticFoodService.addAqutic(this.signupForm.value.name, this.signupForm.value.detail, this.signupForm.value.url, this.signupForm.value.qty);
-    // console.log(this.signupForm);
-    // this.signupForm.reset()
+    this.calculate.calculate()
+    this.signupForm.reset()
   }
 
   onAddMenu() {

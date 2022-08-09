@@ -33,5 +33,11 @@
         <p class="list-group-item-text">จำนวน {{data.onHand}}/{{data.quantity}}</p>
       </div>
     </div>
+    <div class="row">
+      <h5>ตย.ชื่อเมนูอาหาร</h5>
+      <div class="col-12" *ngFor="let item of data.menu">
+        <p>{{item}}</p>
+      </div>
+    </div>
   </div>
 </div>

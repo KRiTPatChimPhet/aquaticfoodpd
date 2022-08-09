@@ -1,5 +1,6 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AquaticFoodService } from 'src/app/service/aquatic-food.service';
+import { DataStorageService } from 'src/app/service/data-storage.service';
 import { AquaticFood } from '../../aquaticFood.model';
 
 
@@ -10,7 +11,7 @@ import { AquaticFood } from '../../aquaticFood.model';
 })
 export class AquaticFoodItemComponent implements OnInit {
 
-  constructor(private aquaticFoodService:AquaticFoodService ) {}
+  constructor(private aquaticFoodService:AquaticFoodService) {}
 
   aquaticFood!:AquaticFood[];
 

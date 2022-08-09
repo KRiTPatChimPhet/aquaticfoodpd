@@ -7,6 +7,9 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import { AquaticFood } from 'src/app/aquatic-food/aquaticFood.model';
+import { AquaticFoodService } from 'src/app/service/aquatic-food.service';
+import { CalculateQuatityService } from 'src/app/service/calculate-quatity.service';
 import { DistributionService } from 'src/app/service/distribution.service';
 import { Distribution } from 'src/app/shared/distribution.model';
 
@@ -24,11 +27,13 @@ export class DistributionEditComponent implements OnInit {
 
   D!: Distribution;
 
+  item!: AquaticFood;
+
   placeholderDritibution!: { name: string; quantity: string };
 
   checkUpdate: boolean = false;
 
-  constructor(private distibutionService: DistributionService, private route: ActivatedRoute) { }
+  constructor(private distibutionService: DistributionService) { }
 
   ngOnInit(): void {
     this.D = { name: '', quantity: NaN };
@@ -50,7 +55,7 @@ export class DistributionEditComponent implements OnInit {
         name: this.signupForm.value.aquaticNameInput,
         quantity: parseInt(this.signupForm.value.qunatityInput)
       })
-    )
+    );
   }
 
   updateData() {

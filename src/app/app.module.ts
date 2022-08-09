@@ -15,6 +15,7 @@ import { AquaticFoodService } from './service/aquatic-food.service';
 import { AquaticEditComponent } from './aquatic-edit/aquatic-edit.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -36,7 +37,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [AquaticFoodService],
   bootstrap: [AppComponent]

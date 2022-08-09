@@ -1,4 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { AquaticFood } from '../aquatic-food/aquaticFood.model';
+import { AquaticFoodService } from '../service/aquatic-food.service';
+import { DataStorageService } from '../service/data-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -7,18 +11,19 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Output() open = new EventEmitter<string>();
+  url = "https://aquatic-food-default-rtdb.asia-southeast1.firebasedatabase.app/post.json";
 
-  // onAquaticFood(){
-  //   this.open.emit("aquatic");
-  // }
-
-  // onDritisbution(){
-  //   this.open.emit("dritisbution");
-  // }
-  constructor() { }
+  constructor(private http: HttpClient, private dataStorageService: DataStorageService, private aquaticFoodService: AquaticFoodService) { }
 
   ngOnInit(): void {
   }
 
+  onCreatePost() {
+    this.dataStorageService.createPost()
+  }
+
+  onFetchPosts() {
+    this.dataStorageService.fetchPosts()
+    this.http.delete(this.url).subscribe(() => {})
+  }
 }
