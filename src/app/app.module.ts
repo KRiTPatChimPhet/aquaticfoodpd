@@ -17,7 +17,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
-import { LoggingInterceptor } from './shared/logging.interceptor';
+import { AuthComponent } from './auth/auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AlertComponent } from './shared/alert/alert.component';
+import { PlacehoderDirective } from './shared/placehoder.directive';
 
 
 
@@ -33,7 +36,11 @@ import { LoggingInterceptor } from './shared/logging.interceptor';
     HeaderComponent,
     DropdownDirective,
     AquaticEditComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AuthComponent,
+    LoadingSpinnerComponent,
+    AlertComponent,
+    PlacehoderDirective
   ],
   imports: [
     BrowserModule,
@@ -45,10 +52,6 @@ import { LoggingInterceptor } from './shared/logging.interceptor';
   providers: [AquaticFoodService,{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
-    multi: true
-  },{
-    provide: HTTP_INTERCEPTORS,
-    useClass: LoggingInterceptor,
     multi: true
   }],
   bootstrap: [AppComponent]

@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { AquaticFood } from '../aquatic-food/aquaticFood.model';
-import { AquaticFoodService } from '../service/aquatic-food.service';
-import { CalculateQuatityService } from '../service/calculate-quatity.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../service/auth.service';
 import { DataStorageService } from '../service/data-storage.service';
 
 @Component({
@@ -10,20 +8,39 @@ import { DataStorageService } from '../service/data-storage.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+
+  userSubscription = new Subscription();
+
+  isAuthenticate = false;
 
   url = "https://aquatic-food-default-rtdb.asia-southeast1.firebasedatabase.app/post.json";
 
-  constructor(private http: HttpClient, private dataStorageService: DataStorageService, private calculate: CalculateQuatityService) { }
+  constructor(private dataStorageService: DataStorageService,
+              private authService: AuthService) { }
 
-  ngOnInit(): void {}
-
-  onCreatePost() {
-    this.dataStorageService.createPost()
+  ngOnInit(): void {
+    this.userSubscription = this.authService.userSubject
+    .subscribe(
+      user => {
+        this.isAuthenticate = !!user;
+      }
+    )
   }
 
-  onFetchPosts() {
-    this.dataStorageService.fetchPosts()
-    this.calculate.calculate()
+  onSaveAquatic() {
+    this.dataStorageService.saveAquatic()
+  }
+
+  onFetchAquatic() {
+    this.dataStorageService.fetchAquatic()
+  }
+
+  onLogout() {
+    this.authService.logout()
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 }

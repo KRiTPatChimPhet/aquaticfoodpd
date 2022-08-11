@@ -1,31 +1,37 @@
-<nav class="navbar navbar-expand-md navbar-light">
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: rgb(155, 27, 219);">
   <div class="container-fluid">
-    <a class="navbar-brand"  routerLink="/aquatic-food">Aquatic Food PD</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" routerLink="">Aquatic Food PD</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link"  routerLinkActive="active" routerLink="/aquatic-food" >Aquatic Food</a>
+        <li class="nav-item" *ngIf="isAuthenticate">
+          <a class="nav-link" routerLinkActive="active" routerLink="/aquatic-food">Aquatic Food</a>
+        </li>
+        <li class="nav-item" *ngIf="!isAuthenticate">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/auth">Authentication</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLinkActive]="['active']" routerLink="/distribution-list">Distribution</a>
         </li>
       </ul>
-      <div class="dropdown">
-        <button
-          class="btn dropdown-toggle"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false">
-          Manage
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" routerLink="" (click)="onCreatePost()">Save Data</a></li>
-          <li><a class="dropdown-item" routerLink="/aquatic-food" (click)="onFetchPosts()">Fetch Data</a></li>
-        </ul>
-      </div>
+      <ul class="nav navbar-nav navbar-right me-3">
+        <li class="nav-item" *ngIf="isAuthenticate">
+          <a style="cursor: pointer;" class="nav-link" (click)="onLogout()">Logout</a>
+        </li>
+        <li class="nav-item dropdown" appDropdown *ngIf="isAuthenticate">
+          <a style="cursor: pointer;" class="nav-link dropdown-toggle" role="button">
+            Manage
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="" (click)="onSaveAquatic()">Save Data</a></li>
+            <li><a class="dropdown-item" routerLink="/aquatic-food" (click)="onFetchAquatic()">Fetch Data</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
