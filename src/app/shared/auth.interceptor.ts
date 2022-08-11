@@ -4,21 +4,29 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpEventType
+  HttpParams
 } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { exhaustMap, Observable, take } from 'rxjs';
+import { AuthService } from '../service/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private authService: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("Request is on its way!");
-    console.log(request.url);
-    const modifiedRequest = request.clone({
-      setHeaders : { Auth : 'xyz'}
-    })
-    return next.handle(modifiedRequest)
+    return this.authService.userSubject.pipe(
+      take(1),
+      exhaustMap(user => {
+        if (user) {
+          const modifiedReq = request.clone({
+            params: new HttpParams().set('auth', <string>user?.token)
+          });
+          return next.handle(modifiedReq);
+        } else {
+          return next.handle(request);
+        }
+      })
+    )
   }
 }
