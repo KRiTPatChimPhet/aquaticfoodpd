@@ -8,6 +8,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthComponent } from './auth/auth/auth.component';
 import { DistributionListComponent } from './distribution-list/distribution-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AquaticResolveService } from './service/aquatic-resolve.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/aquatic-food', pathMatch: 'full'},
@@ -15,8 +16,9 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
   children:[
     {path: 'new',component: AquaticEditComponent},
-    {path: 'detail/:name',component: AquaticFoodDetailComponent},
-    {path: 'detail/:name/:index/:edit',component: AquaticEditComponent}
+    {path: ':name',component: AquaticFoodDetailComponent,
+     resolve: {aquaticData:AquaticResolveService}},
+    {path: ':name/edit',component: AquaticEditComponent}
   ]},
   { path: 'auth', component: AuthComponent},
   { path: 'distribution-list', component: DistributionListComponent, children:[

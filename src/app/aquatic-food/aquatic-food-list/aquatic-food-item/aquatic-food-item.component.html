@@ -1,5 +1,5 @@
 <div *ngFor="let foodList of aquaticFood">
-  <a [routerLink]="['/aquatic-food','detail',foodList.name]" routerLinkActive="active" class="list-group-item clearfix">
+  <a [routerLink]="['/aquatic-food',foodList.name]" routerLinkActive="active" class="list-group-item clearfix">
     <div class="float-start">
       <span>
       <h4 class="list-group-item-heading">{{foodList.name}}</h4>
