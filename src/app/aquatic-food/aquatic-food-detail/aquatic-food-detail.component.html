@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-12">
     <img
-    src={{data.imagePath}}
+    src={{aquaticFood.imagePath}}
     class="img-fluid"
     alt="Test"
     style="width: 200px;">
     <div class="row">
       <div class="col-12 mt-3">
-        <h4>{{data.name}}</h4>
+        <h4>{{aquaticFood.name}}</h4>
       </div>
     </div>
     <div class="row">
@@ -17,7 +17,7 @@
             Manage Aquatic Food On Hand
           </button>
           <ul class="dropdown-menu" >
-            <li><a class="dropdown-item" [routerLink]="['/aquatic-food',data.name,'edit']">Update Aquatic</a></li>
+            <li><a class="dropdown-item" [routerLink]="['edit']">Update Aquatic</a></li>
             <li><a class="dropdown-item" routerLink="/aquatic-food" (click)="deleteAqutic()">Delete Aqutic</a></li>
           </ul>
         </div>
@@ -25,17 +25,17 @@
     </div><br>
     <div class="row">
       <div class="col-12">
-        <p>{{data.description}}</p>
+        <p>{{aquaticFood.description}}</p>
       </div>
     </div>
     <div class="row">
       <div class="col-12">
-        <p class="list-group-item-text">จำนวน {{data.onHand}}/{{data.quantity}}</p>
+        <p class="list-group-item-text">จำนวน </p>
       </div>
     </div>
     <div class="row">
       <h5>ตย.ชื่อเมนูอาหาร</h5>
-      <div class="col-12" *ngFor="let item of data.menu">
+      <div class="col-12" *ngFor="let item of aquaticFood.menu">
         <p>{{item}}</p>
       </div>
     </div>

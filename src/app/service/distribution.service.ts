@@ -28,6 +28,15 @@ export class DistributionService {
     return this.check
   }
 
+  addValueOnInput(value:string){
+    const dis = this.distributions.find(
+      (v)=>{
+        return v.name == value
+      }
+    );
+    return dis
+  }
+
   updateQty(qty: Distribution) {
     for (let index = 0; index < this.distributions.length; index++) {
       if (qty.name === this.distributions[index].name) {

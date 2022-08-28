@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AquaticFoodService } from '../service/aquatic-food.service';
 import { AuthService } from '../service/auth.service';
 import { DataStorageService } from '../service/data-storage.service';
 
@@ -17,7 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   url = "https://aquatic-food-default-rtdb.asia-southeast1.firebasedatabase.app/post.json";
 
   constructor(private dataStorageService: DataStorageService,
-              private authService: AuthService) { }
+              private authService: AuthService, private aquaticFoodService: AquaticFoodService) { }
 
   ngOnInit(): void {
     this.userSubscription = this.authService.userSubject
@@ -29,15 +30,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSaveAquatic() {
-    this.dataStorageService.saveAquatic()
+    this.dataStorageService.saveAquatic();
   }
 
   onFetchAquatic() {
-    this.dataStorageService.fetchAquatic()
+    this.dataStorageService.fetchAquatic().subscribe(() => { });
   }
 
   onLogout() {
-    this.authService.logout()
+    this.authService.logout();
+    this.aquaticFoodService.resetAquaticFood();
   }
 
   ngOnDestroy(): void {

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Data, Params } from '@angular/router';
 import { AquaticFoodService } from 'src/app/service/aquatic-food.service';
+import { DataStorageService } from 'src/app/service/data-storage.service';
+import { DistributionService } from 'src/app/service/distribution.service';
+import { Distribution } from 'src/app/shared/distribution.model';
 import { AquaticFood } from '../aquaticFood.model';
 
 @Component({
@@ -10,20 +13,35 @@ import { AquaticFood } from '../aquaticFood.model';
 })
 export class AquaticFoodDetailComponent implements OnInit {
 
-  data!: AquaticFood;
 
-  constructor(private route: ActivatedRoute,private aquaticFoodService:AquaticFoodService) { }
+  aquaticFood!: AquaticFood;
+  distribution!: Distribution;
+
+  constructor(private route: ActivatedRoute, private aquaticFoodService: AquaticFoodService,
+    private dataStorageService: DataStorageService, private distributionService: DistributionService) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.data = this.aquaticFoodService.openDescription(params['name'])!;
-      }
-    );
+    if (this.aquaticFood) {
+      this.route.params.subscribe(
+        (params: Params) => {
+          this.aquaticFood = this.aquaticFoodService.addAquaticByNum(+params['id'])!;
+        }
+      );
+    } else this.dataStorageService.fetchAquatic().subscribe(() => {
+      this.route.params.subscribe((params: Params) => {
+        if (+params['name']) {
+          this.aquaticFood = this.aquaticFoodService.addAquaticByNum(+params['name'])!;
+          this.distribution = this.distributionService.addValueOnInput(this.aquaticFood.name)!;
+        } else {
+          this.aquaticFood = this.aquaticFoodService.openDescription(params['name'])!;
+          this.distribution = this.distributionService.addValueOnInput(this.aquaticFood.name)!;
+        }
+      });
+    });
   }
 
   deleteAqutic() {
-    this.aquaticFoodService.deleteItem(this.data.name)
+    this.aquaticFoodService.deleteItem(this.aquaticFood.name)
   }
 
 }

@@ -55,7 +55,6 @@ export class AquaticEditComponent implements OnInit {
         description: this.signupForm.value.detail,
         imagePath: this.signupForm.value.url,
         quantity: this.signupForm.value.qty,
-        onHand: 0,
         menu : this.signupForm.value.menu
       };
       this.aquaticFoodService.upDateAquatic(this.checkOrder, updateAquatic)
@@ -67,7 +66,6 @@ export class AquaticEditComponent implements OnInit {
         this.signupForm.value.qty,
         this.signupForm.value.menu
       );
-      console.log(this.aquaticFoodService.getAquaticFoods)
     }
     this.signupForm.reset()
   }

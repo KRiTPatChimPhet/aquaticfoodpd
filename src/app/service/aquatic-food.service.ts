@@ -5,8 +5,8 @@ import { AquaticFood } from "../aquatic-food/aquaticFood.model"
 export class AquaticFoodService {
 
   private aquaticFoods: AquaticFood[] = [
-      // new AquaticFood("ปลาอินทรี", "กินได้ อร่อยดี", "https://www.bloggang.com/data/f/fasaiwonmai/picture/1452667716.jpg", 100, 0, []),
-      // new AquaticFood("หมึก", "กินได้ อร่อยดี", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Arrow_squid.jpg/300px-Arrow_squid.jpg", 100, 0, [])
+      // new AquaticFood("ปลาอินทรี", "กินได้ อร่อยดี", "https://www.bloggang.com/data/f/fasaiwonmai/picture/1452667716.jpg", 100, []),
+      // new AquaticFood("หมึก", "กินได้ อร่อยดี", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Arrow_squid.jpg/300px-Arrow_squid.jpg", 100, [])
   ];
 
   getAquaticFoods() {
@@ -22,12 +22,19 @@ export class AquaticFoodService {
     return detail
   }
 
-  clearArray() {
-    this.aquaticFoods = []
+  addAquaticByNum(num: number) {
+    const detail = this.aquaticFoods.find((value:AquaticFood,index:number,opject:AquaticFood[]) => {
+      return index+1 === num;
+    });
+    return detail;
   }
 
-  addAqutic(name: string, desc: string, imagePath: string, qty: number, menu: Array<string>) {
-    this.aquaticFoods.push(new AquaticFood(name, desc, imagePath, qty, 0, menu))
+  resetAquaticFood(){
+    return this.aquaticFoods = [];
+  }
+
+  addAqutic(name: string, description: string, imagePath: string, qty: number, menu: Array<string>) {
+    this.aquaticFoods.push(new AquaticFood(name, description, imagePath, qty, menu))
   }
 
   upDateAquatic(name: string, upDate: AquaticFood) {

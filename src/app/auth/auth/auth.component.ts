@@ -51,10 +51,7 @@ export class AuthComponent implements OnInit {
           this.router.navigate(["/aquatic-food"])
         },
         error: errorMessage => {
-          // console.log(errorMessage.name, errorMessage.message);
-          // this.error = errorMessage;
           this.showErrorAlert(errorMessage)
-          // console.log(this.error)
           this.isLoading = false;
         }
       });

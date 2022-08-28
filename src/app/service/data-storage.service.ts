@@ -24,24 +24,16 @@ export class DataStorageService {
   }
 
   fetchAquatic() {
-    return this.http.get<AquaticFood[]>(this.url).pipe(
-      map((responseData) => {
-        const postArray: AquaticFood[] = [];
-        for (let key in responseData) {
-          if (responseData.hasOwnProperty(key)) {
-            postArray.push({ ...responseData[key] });
-            this.aquaticFoodService.addAqutic(
-              responseData[key].name,
-              responseData[key].description,
-              responseData[key].imagePath,
-              responseData[key].quantity,
-              responseData[key].menu
-            )
+    return this.http.get<AquaticFood[]>(this.url)
+      .pipe(
+        take(1),
+        map((aqutic) => {
+          const postArray: AquaticFood[] = this.aquaticFoodService.getAquaticFoods();
+          if (aqutic) {
+            postArray.push(...aqutic);
           }
-        }
-        return postArray
-      })
-    ).subscribe(() => { })
+        })
+      )
   }
 
 }

@@ -9,10 +9,9 @@ import { CalculateQuatityService } from '../service/calculate-quatity.service';
 export class AquaticFoodComponent implements OnInit {
 
 
-  constructor(private calculate: CalculateQuatityService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.calculate.calculate()
   }
 
 }
