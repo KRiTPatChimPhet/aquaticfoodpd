@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onFetchAquatic() {
-    this.dataStorageService.fetchAquatic().subscribe(() => { });
+    this.dataStorageService.fetchAquatic().subscribe();
   }
 
   onLogout() {

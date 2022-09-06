@@ -24,13 +24,16 @@ export class DataStorageService {
   }
 
   fetchAquatic() {
+    this.aquaticFoodService.resetAquaticFood();
+    this.aquaticFoodService.aquaticFoodSubject.next(false);
     return this.http.get<AquaticFood[]>(this.url)
       .pipe(
         take(1),
-        map((aqutic) => {
-          const postArray: AquaticFood[] = this.aquaticFoodService.getAquaticFoods();
-          if (aqutic) {
-            postArray.push(...aqutic);
+        map((aquatic) => {
+          if (aquatic) {
+            console.log(aquatic)
+            this.aquaticFoodService.aquaticFoodSubject.next(true);
+            console.log(this.aquaticFoodService.addFetchAquatic(aquatic));
           }
         })
       )

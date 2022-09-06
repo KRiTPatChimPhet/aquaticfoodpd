@@ -1,8 +1,11 @@
 import { newArray } from "@angular/compiler/src/util";
 import { EventEmitter, Injectable } from "@angular/core"
+import { Subject } from "rxjs";
 import { AquaticFood } from "../aquatic-food/aquaticFood.model"
 @Injectable()
 export class AquaticFoodService {
+
+  aquaticFoodSubject = new Subject<boolean>();
 
   private aquaticFoods: AquaticFood[] = [
       // new AquaticFood("ปลาอินทรี", "กินได้ อร่อยดี", "https://www.bloggang.com/data/f/fasaiwonmai/picture/1452667716.jpg", 100, []),
@@ -11,6 +14,10 @@ export class AquaticFoodService {
 
   getAquaticFoods() {
     return this.aquaticFoods;
+  }
+
+  addFetchAquatic(aquaticFoods: AquaticFood[]) {
+    return this.aquaticFoods = aquaticFoods;
   }
 
   openDescription(name: string) {
