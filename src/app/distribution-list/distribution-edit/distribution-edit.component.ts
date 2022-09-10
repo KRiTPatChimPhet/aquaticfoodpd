@@ -29,8 +29,6 @@ export class DistributionEditComponent implements OnInit {
 
   item!: AquaticFood;
 
-  placeholderDritibution!: { name: string; quantity: string };
-
   checkUpdate: boolean = false;
 
   constructor(private distibutionService: DistributionService) { }
@@ -41,10 +39,6 @@ export class DistributionEditComponent implements OnInit {
       this.D = data
       this.checkUpdate = true;
     });
-    this.placeholderDritibution = {
-      name: 'Aquatic Name',
-      quantity: 'Aquatic Qty'
-    }
   }
 
   check: boolean = false;
@@ -73,6 +67,7 @@ export class DistributionEditComponent implements OnInit {
 
   onClear() {
     this.checkUpdate = false;
+    this.D = { name: '', quantity: 0 };
   }
 
   onDelete() {

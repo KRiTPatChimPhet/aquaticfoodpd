@@ -1,10 +1,15 @@
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-  <button type="submit" class="btn btn-success" [disabled]="!signupForm.valid">Save</button>
-  <button routerLink="" type="button" class="btn btn-danger ms-2">Cancel</button>
-  <button type="reset" *ngIf="signupForm.get('name')?.value ||
-             signupForm.get('quantity')?.value ||
-             signupForm.get('url')?.value ||
-             signupForm.get('detail')?.value" class="btn btn-secondary ms-2">clear</button>
+  <div *ngIf="submitEvent === true" class="row">
+    <div class="alert alert-success">
+      <h5>บันทึกข้อมูลชั่วคราวเรียบร้อย</h5>
+      <hr />
+      <p>
+        เพื่อบันทึกข้อมูลในฐานข้อมูล กรุณาใช้เมนู "บันทึก" ใน "จัดการข้อมูล"
+      </p>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success" [disabled]="!signupForm.valid">บันทึกข้อมูล</button>
+  <button routerLink="../" type="button" class="btn btn-danger ms-2">ยกเลิกรายการ</button>
   <div class="row">
     <div class="col-md-12 mt-3">
       <label class="form-label">ชื่อสินค้า</label>
@@ -29,8 +34,8 @@
     <span *ngIf="!signupForm.get('url')?.valid && signupForm.get('url')?.touched" class="help-block mb-3 mt-2">กรุณากรอก
       Url รูปของสินค้า</span>
     <div class="row">
-      <div class="text-center">
-        <img src={{signupForm.value.url}} class="rounded mt-3" alt="..." style="width: 200px;">
+      <div class="col-xs-12 text-center">
+        <img class="img-responsive mt-3" alt="แสดงภาพประกอบ" style="max-width: 350px;"  src={{signupForm.value.url}}>
       </div>
     </div>
   </div>
@@ -43,15 +48,15 @@
       class="help-block mb-3 mt-2">กรุณากรอกรายละเอียดสินค้า</span>
   </div>
   <div class="mb-3 mt-2" formArrayName="menu">
-    <label class="form-label">ตัวอย่าง ชื่อเมนูอาหาร จากวัถุดิบนี้</label>
+    <label class="form-label">ตัวอย่าง ชื่อเมนูอาหาร จากวัตถุดิบนี้</label>
     <div class="row mt-1" *ngFor="let menuControl of controls ; let i = index;">
       <div class="btn-group">
         <div class="col-11">
-          <input type="text" class="form-control" [formControlName]="i">
+          <input type="text"  placeholder="ตย. ชื่อเมนูอาหารที่ใช้วัตถุดิบนี้" class="form-control" [formControlName]="i">
         </div>
         <div class="col-2" *ngIf="signupForm.get('menu')?.value">
-        <button type="button" (click)="deleteMenu(i)" class="btn btn-danger ms-2">X</button>
-      </div>
+          <button type="button" (click)="deleteMenu(i)" class="btn btn-danger ms-2">X</button>
+        </div>
       </div>
     </div>
     <hr />

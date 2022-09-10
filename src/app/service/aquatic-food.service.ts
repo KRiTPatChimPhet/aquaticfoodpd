@@ -7,6 +7,8 @@ export class AquaticFoodService {
 
   aquaticFoodSubject = new Subject<boolean>();
 
+  showManageSubject = new Subject<boolean>();
+
   private aquaticFoods: AquaticFood[] = [
       // new AquaticFood("ปลาอินทรี", "กินได้ อร่อยดี", "https://www.bloggang.com/data/f/fasaiwonmai/picture/1452667716.jpg", 100, []),
       // new AquaticFood("หมึก", "กินได้ อร่อยดี", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Arrow_squid.jpg/300px-Arrow_squid.jpg", 100, [])

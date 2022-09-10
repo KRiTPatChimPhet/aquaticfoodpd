@@ -1,24 +1,22 @@
-<div class="row">
-  <div class="col-12">
-    <img
-    src={{aquaticFood.imagePath}}
-    class="img-fluid"
-    alt="Test"
-    style="width: 200px;">
+<div class="row" *ngIf="aquaticFood">
+  <div class="col-md-7">
+    <img src={{aquaticFood.imagePath}} class="img-fluid rounded mx-auto d-block" alt={{aquaticFood.name}}
+      style="max-width: 350px;">
     <div class="row">
       <div class="col-12 mt-3">
-        <h4>{{aquaticFood.name}}</h4>
+        <h2>{{aquaticFood.name}}</h2>
       </div>
     </div>
     <div class="row">
       <div class="col-12">
         <div class="dropdown" appDropdown>
-          <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="" >
-            Manage Aquatic Food On Hand
+          <button type="button" id="dropdownMenuButton" data-toggle="" aria-haspopup="true" aria-expanded="false"
+            class="btn btn-primary dropdown-toggle">
+            คลังสินค้าอาหารทะเล
           </button>
-          <ul class="dropdown-menu" >
-            <li><a class="dropdown-item" [routerLink]="['edit']">Update Aquatic</a></li>
-            <li><a class="dropdown-item" routerLink="/aquatic-food" (click)="deleteAqutic()">Delete Aqutic</a></li>
+          <ul class="dropdown-menu">
+            <a class="dropdown-item" [routerLink]="['edit']">แก้ไขรายการสินค้า</a>
+            <a class="dropdown-item" routerLink="/aquatic-food" (click)="deleteAqutic()">ลบรายการสินค้า</a>
           </ul>
         </div>
       </div>
@@ -30,13 +28,21 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <p class="list-group-item-text">จำนวน </p>
+        <h5>ตย. ชื่อเมนูอาหารที่ใช้วัตถุดิบนี้</h5>
+        <p>{{aquaticFood.menu}}</p>
       </div>
     </div>
     <div class="row">
-      <h5>ตย.ชื่อเมนูอาหาร</h5>
-      <div class="col-12" *ngFor="let item of aquaticFood.menu">
-        <p>{{item}}</p>
+      <div class="col-9 col-xs-4 btn-group-vertical">
+        <button _ngcontent-plb-c30="" type="button" class="btn btn-secondary mb-2 text-end">
+          <i class="bi bi-box-arrow-in-down float-start"></i> สินค้ารับเข้าคลัง
+          <span class="badge bg-warning border border-light text-dark ms-3">{{aquaticFood.quantity}}</span></button>
+        <button type="button" class="btn btn-secondary mb-2 text-end">
+          <i class="bi bi-cart-plus float-start"></i> ยอดจอง/สั่งซื้อ
+          <span class="badge border border-light bg-success ms-3">{{distribution.quantity}}</span></button>
+        <button type="button" class="btn btn-secondary mb-2 text-end">
+          <i class="bi bi-coin float-start"></i> ปริมาณสินค้าที่ขายได้
+          <span class="badge border border-light bg-danger ms-3">{{aquaticFood.quantity - distribution.quantity}}</span></button>
       </div>
     </div>
   </div>

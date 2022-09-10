@@ -13,6 +13,6 @@ export class DropdownDirective {
     this.dropDown = !this.dropDown;
     let part = this.elment.nativeElement.querySelector('.dropdown-menu');
     if(this.dropDown)this.renderer.addClass(part, 'show');
-    else this.renderer.removeClass(part, 'show')
+    else this.renderer.removeClass(part, 'show');
   }
 }

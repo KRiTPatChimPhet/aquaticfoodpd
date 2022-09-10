@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CalculateQuatityService } from '../service/calculate-quatity.service';
+import { AquaticFoodService } from '../service/aquatic-food.service';
 
 @Component({
   selector: 'app-aquatic-food',
@@ -9,9 +9,10 @@ import { CalculateQuatityService } from '../service/calculate-quatity.service';
 export class AquaticFoodComponent implements OnInit {
 
 
-  constructor() {}
+  constructor(private aquaticFoodService: AquaticFoodService) {}
 
   ngOnInit(): void {
+    this.aquaticFoodService.showManageSubject.next(true);
   }
 
 }

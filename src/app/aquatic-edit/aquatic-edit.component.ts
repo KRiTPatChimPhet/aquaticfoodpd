@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { AquaticFood } from '../aquatic-food/aquaticFood.model';
 import { AquaticFoodService } from '../service/aquatic-food.service';
 import { CalculateQuatityService } from '../service/calculate-quatity.service';
+import { DataStorageService } from '../service/data-storage.service';
 
 @Component({
   selector: 'app-aquatic-edit',
@@ -14,37 +15,50 @@ export class AquaticEditComponent implements OnInit {
 
   signupForm!: FormGroup;
 
-  aquatic!: AquaticFood | undefined
+  aquatic!: AquaticFood | undefined;
 
-  checkOrder!: string
+  checkOrder!: string;
+
+  submitEvent: boolean = false;
 
   constructor(private aquaticFoodService: AquaticFoodService,
-              private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private dataStorageService: DataStorageService) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.checkOrder = params['name']!;
+    this.dataStorageService.fetchAquatic().subscribe(() => {
+      this.route.params.subscribe(
+        (params: Params) => {
+          this.checkOrder = params['name']!;
+        }
+      );
+      this.aquatic = this.aquaticFoodService.openDescription(this.checkOrder);
+      if (!this.aquatic) {
+        this.signupForm = new FormGroup({
+          'name': new FormControl(null, Validators.required),
+          'qty': new FormControl(null, Validators.required),
+          'url': new FormControl(null, Validators.required),
+          'detail': new FormControl(null, Validators.required),
+          'menu': new FormArray([])
+        })
+      } else {
+        this.signupForm = new FormGroup({
+          'name': new FormControl(this.aquatic.name, Validators.required),
+          'qty': new FormControl(this.aquatic.quantity, Validators.required),
+          'url': new FormControl(this.aquatic.imagePath, Validators.required),
+          'detail': new FormControl(this.aquatic.description, Validators.required),
+          'menu': new FormArray([])
+        });
+        if (this.aquatic.menu) {
+          this.aquatic.menu.map(
+            (value: string, index: number, array: string[]) => {
+              const controls = new FormControl(value, Validators.required);
+              (<FormArray>this.signupForm.get('menu')).push(controls);
+            }
+          );
+        }
       }
-    );
-    this.aquatic = this.aquaticFoodService.openDescription(this.checkOrder);
-    if (!this.aquatic) {
-      this.signupForm = new FormGroup({
-        'name': new FormControl(null, Validators.required),
-        'qty': new FormControl(null, Validators.required),
-        'url': new FormControl(null, Validators.required),
-        'detail': new FormControl(null, Validators.required),
-        'menu': new FormArray([])
-      })
-    } else {
-      this.signupForm = new FormGroup({
-        'name': new FormControl(this.aquatic.name, Validators.required),
-        'qty': new FormControl(this.aquatic.quantity, Validators.required),
-        'url': new FormControl(this.aquatic.imagePath, Validators.required),
-        'detail': new FormControl(this.aquatic.description, Validators.required),
-        'menu': new FormArray([])
-      })
-    }
+    });
   }
 
   onSubmit() {
@@ -55,7 +69,7 @@ export class AquaticEditComponent implements OnInit {
         description: this.signupForm.value.detail,
         imagePath: this.signupForm.value.url,
         quantity: this.signupForm.value.qty,
-        menu : this.signupForm.value.menu
+        menu: this.signupForm.value.menu
       };
       this.aquaticFoodService.upDateAquatic(this.checkOrder, updateAquatic)
     } else {
@@ -67,7 +81,7 @@ export class AquaticEditComponent implements OnInit {
         this.signupForm.value.menu
       );
     }
-    this.signupForm.reset()
+    this.submitEvent = true;
   }
 
   onAddMenu() {

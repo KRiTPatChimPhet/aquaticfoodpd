@@ -15,12 +15,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isAuthenticate = false;
 
+  isManage = true;
+
   url = "https://aquatic-food-default-rtdb.asia-southeast1.firebasedatabase.app/post.json";
 
   constructor(private dataStorageService: DataStorageService,
               private authService: AuthService, private aquaticFoodService: AquaticFoodService) { }
 
   ngOnInit(): void {
+    this.aquaticFoodService.showManageSubject.subscribe(
+      (check) => {
+        this.isManage = check
+      }
+    )
     this.userSubscription = this.authService.userSubject
     .subscribe(
       user => {

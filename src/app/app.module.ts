@@ -21,6 +21,7 @@ import { AuthComponent } from './auth/auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { PlacehoderDirective } from './shared/placehoder.directive';
+import { AquaticStartComponent } from './aquatic-food/aquatic-start/aquatic-start.component';
 
 
 
@@ -40,7 +41,8 @@ import { PlacehoderDirective } from './shared/placehoder.directive';
     AuthComponent,
     LoadingSpinnerComponent,
     AlertComponent,
-    PlacehoderDirective
+    PlacehoderDirective,
+    AquaticStartComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,6 @@ import { PlacehoderDirective } from './shared/placehoder.directive';
     useClass: AuthInterceptor,
     multi: true
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AquaticEditComponent } from './aquatic-edit/aquatic-edit.component';
 import { AquaticFoodDetailComponent } from './aquatic-food/aquatic-food-detail/aquatic-food-detail.component';
 import { AquaticFoodComponent } from './aquatic-food/aquatic-food.component';
+import { AquaticStartComponent } from './aquatic-food/aquatic-start/aquatic-start.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthComponent } from './auth/auth/auth.component';
 import { DistributionListComponent } from './distribution-list/distribution-list.component';
@@ -13,6 +14,7 @@ const appRoutes: Routes = [
   { path: 'aquatic-food', component: AquaticFoodComponent,
     canActivate: [AuthGuard],
   children:[
+    {path: '', component: AquaticStartComponent},
     {path: 'new',component: AquaticEditComponent},
     {path: ':name',
       component: AquaticFoodDetailComponent},

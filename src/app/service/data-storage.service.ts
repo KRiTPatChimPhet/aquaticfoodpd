@@ -14,7 +14,7 @@ export class DataStorageService {
 
   url = "https://aquatic-food-default-rtdb.asia-southeast1.firebasedatabase.app/post.json";
 
-  constructor(private http: HttpClient, private aquaticFoodService: AquaticFoodService, private authService: AuthService) { }
+  constructor(private http: HttpClient, private aquaticFoodService: AquaticFoodService) { }
 
   saveAquatic() {
     this.http.put(this.url, this.aquaticFoodService.getAquaticFoods())
@@ -31,9 +31,8 @@ export class DataStorageService {
         take(1),
         map((aquatic) => {
           if (aquatic) {
-            console.log(aquatic)
+            this.aquaticFoodService.addFetchAquatic(aquatic);
             this.aquaticFoodService.aquaticFoodSubject.next(true);
-            console.log(this.aquaticFoodService.addFetchAquatic(aquatic));
           }
         })
       )

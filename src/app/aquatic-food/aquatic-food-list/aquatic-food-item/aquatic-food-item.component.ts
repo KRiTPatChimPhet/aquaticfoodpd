@@ -17,7 +17,15 @@ export class AquaticFoodItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.aquaticFood = this.aquaticFoodService.getAquaticFoods();
-    console.log(this.aquaticFood)
+    console.log('1 =',this.aquaticFood);
+    this.aquaticFoodService.aquaticFoodSubject.subscribe(
+      check => {
+        this.aquaticFood = this.aquaticFoodService.getAquaticFoods();
+        console.log('2 =',this.aquaticFood);
+        console.log(check)
+      }
+    )
+
   }
 
 }
