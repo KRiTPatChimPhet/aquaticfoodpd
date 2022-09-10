@@ -7,7 +7,7 @@ import { AuthService } from './service/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'aquaticfoodpdtest';
+  title = 'aquaticfoodpd';
   openApp = ''
 
   constructor(private authService: AuthService) {}
