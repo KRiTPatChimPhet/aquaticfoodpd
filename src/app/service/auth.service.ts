@@ -124,7 +124,7 @@ export class AuthService {
       throw new Error(errorMessage);
     }
     switch (errorResponse.error.error.message) {
-      case ('EMAIL-EXISTS'):
+      case ('EMAIL_EXISTS'):
         errorMessage = "อีเมล์นี้ถูกใช้ไปแล้ว"
         break;
       case ('EMAIL_NOT_FOUND'):
