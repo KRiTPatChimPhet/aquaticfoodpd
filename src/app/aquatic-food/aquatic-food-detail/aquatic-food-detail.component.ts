@@ -15,7 +15,10 @@ export class AquaticFoodDetailComponent implements OnInit {
 
 
   aquaticFood!: AquaticFood;
+
   distribution!: Distribution;
+
+  disQty:number = 0;
 
   constructor(private route: ActivatedRoute, private aquaticFoodService: AquaticFoodService,
     private dataStorageService: DataStorageService, private distributionService: DistributionService) { }
@@ -36,6 +39,7 @@ export class AquaticFoodDetailComponent implements OnInit {
           this.aquaticFood = this.aquaticFoodService.openDescription(params['name'])!;
           this.distribution = this.distributionService.addValueOnInput(this.aquaticFood.name)!;
         }
+         this.disQty = this.distribution ? this.distribution.quantity : 0;
       });
     });
   }
