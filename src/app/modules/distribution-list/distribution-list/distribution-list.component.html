@@ -1,0 +1,20 @@
+<div class="col-md-10">
+  <div class="row mt-2">
+    <h3>รายการ จอง/ซื้อ สินค้าอาหารทะเล</h3>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <app-distribution-edit></app-distribution-edit>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="list-group">
+        <a [routerLink]='item.name' *ngFor="let item of distributions" (click)="addList(item)"
+          class="list-group-item" style="cursor: pointer">{{item.name}} ({{item.quantity}})
+        </a>
+      </ul>
+    </div>
+  </div>
+</div>

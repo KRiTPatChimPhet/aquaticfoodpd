@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './service/auth.service';
+import { AuthService } from './core/service/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'aquaticfoodpd';
   openApp = ''
 
-  constructor(private authService: AuthService) {}
+  constructor(private _authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.autoLogin();
+    this._authService.autoLogin();
   }
 }

@@ -1,0 +1,56 @@
+<div *ngIf="aquaticFood">
+  <div class="row">
+    <div class="col-md-8">
+      <img src={{aquaticFood.imagePath}} class="img-fluid rounded mx-auto d-block" alt={{aquaticFood.name}}
+        style="max-width: 350px;">
+      <div class="row">
+        <div class="col-12 mt-3">
+          <h2>{{aquaticFood.name}}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="dropdown" appDropdown>
+            <button type="button" id="dropdownMenuButton" data-toggle="" aria-haspopup="true" aria-expanded="false"
+              class="btn btn-primary dropdown-toggle">
+              คลังสินค้าอาหารทะเล
+            </button>
+            <ul class="dropdown-menu" *ngIf="aquaticFood">
+              <a class="dropdown-item" [routerLink]="['edit']">แก้ไขรายการสินค้า</a>
+              <a class="dropdown-item" routerLink="" (click)="deleteAquatic()">ลบรายการสินค้า</a>
+            </ul>
+          </div>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-12">
+          <p>{{aquaticFood.description}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <h5>ตย. ชื่อเมนูอาหารที่ใช้วัตถุดิบนี้</h5>
+          <p>{{aquaticFood.menu}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 btn-group-vertical">
+          <button _ngcontent-plb-c30="" type="button" class="btn btn-secondary mb-2 text-end">
+            <i class="bi bi-box-arrow-in-down float-start"></i> สินค้ารับเข้าคลัง
+            <span class="badge bg-warning border border-light text-dark ms-3">{{aquaticFood.quantity}}</span>
+          </button>
+          <button type="button" class="btn btn-secondary mb-2 text-end">
+            <i class="bi bi-cart-plus float-start"></i> ยอดจอง/สั่งซื้อ
+            <span class="badge border border-light bg-success ms-3">{{0}}</span>
+          </button>
+          <button type="button" class="btn btn-secondary mb-2 text-end">
+            <i class="bi bi-coin float-start"></i> ปริมาณสินค้าที่ขายได้
+            <span class="badge border border-light bg-danger ms-3">
+              {{aquaticFood.quantity}}
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

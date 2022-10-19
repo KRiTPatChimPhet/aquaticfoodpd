@@ -1,29 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AquaticEditComponent } from './aquatic-edit/aquatic-edit.component';
-import { AquaticFoodDetailComponent } from './aquatic-food/aquatic-food-detail/aquatic-food-detail.component';
-import { AquaticFoodComponent } from './aquatic-food/aquatic-food.component';
-import { AquaticStartComponent } from './aquatic-food/aquatic-start/aquatic-start.component';
-import { AuthGuard } from './auth/auth.guard';
-import { AuthComponent } from './auth/auth/auth.component';
-import { DistributionListComponent } from './distribution-list/distribution-list.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/aquatic-food', pathMatch: 'full'},
-  { path: 'aquatic-food', component: AquaticFoodComponent,
-    canActivate: [AuthGuard],
-  children:[
-    {path: '', component: AquaticStartComponent},
-    {path: 'new',component: AquaticEditComponent},
-    {path: ':name',
-      component: AquaticFoodDetailComponent},
-    {path: ':name/edit',component: AquaticEditComponent}
-  ]},
-  { path: 'auth', component: AuthComponent},
-  { path: 'distribution-list', component: DistributionListComponent, children:[
-    {path: ':name',component: DistributionListComponent}]},
-  { path: '**', component: PageNotFoundComponent }
+  {
+    path: '', redirectTo: '/aquatic-food', pathMatch: 'full'
+  },
+  {
+    path: 'aquatic-food',
+    loadChildren: () => import('./modules/aquatic-food/aquatic-food.module')
+      .then(m => m.AquaticFoodModule)
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./modules/auth/auth.module')
+      .then(m => m.AuthModule)
+  },
+  {
+    path: 'distribution-list',
+    loadChildren: () => import('./modules/distribution-list/distribution-list.module')
+      .then(m => m.DistributionListModule)
+  },
+  {
+    path: '**', component: PageNotFoundComponent
+  }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],

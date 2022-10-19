@@ -1,0 +1,31 @@
+<form (ngSubmit)="onSupmit(f)" #f="ngForm">
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="ชื่อรายการสินค้าอาหารทะเล" [ngModel]="distribution.name" ngModel
+        name="aquaticNameInput" required #aquaticNameInput="ngModel">
+      <span *ngIf="!aquaticNameInput.valid && aquaticNameInput.touched" class="help-block">กรุณากรอกชื่อ</span>
+    </div>
+    <div class="col">
+      <input type="number" class="form-control" placeholder="ปริมาณการสั่งซื้อ" [ngModel]="distribution.quantity" ngModel
+        name="qunatityInput" required #qunatityInput="ngModel" pattern="[0-9]+">
+      <span *ngIf="!qunatityInput.valid && qunatityInput.touched" class="help-block">กรุณากรอกจำนวน</span>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <span *ngIf="check === true">มีรายการนี้อยู่แล้ว</span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 mt-3">
+      <button type="submit" class="btn btn-success btn-sm" (click)="onAddFish()" *ngIf="!checkUpdate"
+        [disabled]="f.invalid">เพิ่มรายการ</button>
+      <button type="button" class="btn btn-success btn-sm" (click)="updateData()" *ngIf="checkUpdate"
+        [disabled]="f.invalid">ปรับปรุงรายการ</button>
+      <button type="reset" class="btn btn-danger btn-sm ms-2" routerLink="/distribution-list" (click)="onDelete()"
+        *ngIf="checkUpdate">ลบรายการ</button>
+      <button type="reset" class="btn btn-primary btn-sm ms-2" (click)="onClear()"
+        [disabled]="f.invalid">ยกเลิกรายการ</button>
+    </div>
+  </div>
+</form>

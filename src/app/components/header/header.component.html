@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div class="container-fluid">
+    <a href="#" class="navbar-brand">ระบบจัดการสินค้าอาหารทะเล</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" *ngIf="isAuthenticate">
+          <a class="nav-link" routerLinkActive="active" routerLink="/aquatic-food">สินค้าอาหารทะเล</a>
+        </li>
+        <li class="nav-item" *ngIf="!isAuthenticate">
+          <a class="nav-link" routerLinkActive="active" routerLink="/auth">เข้าใช้ระบบ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/distribution-list">รายการสั่งซื้อ</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right me-3">
+        <li class="nav-item" *ngIf="isAuthenticate">
+          <a style="cursor: pointer;" class="nav-link" (click)="onLogout()">ออกจากระบบ</a>
+        </li>
+        <!-- <li class="nav-item dropdown" appDropdown *ngIf="isAuthenticate">
+          <a style="cursor: pointer;" class="nav-link dropdown-toggle" role="button" *ngIf="isManage">
+            ข้อมูลจากฐานข้อมูล
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="" (click)="onSaveAquatic()">บันทึกข้อมูล</a></li>
+            <li><a class="dropdown-item" routerLink="/aquatic-food" (click)="onFetchAquatic()">เรียกข้อมูล</a></li>
+          </ul>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+</nav>
